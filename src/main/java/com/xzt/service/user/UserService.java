@@ -29,9 +29,9 @@ public class UserService {
     public RetResult userInsert(TUserLogin tUserLogin) throws Exception {
         int flag = userMapper.inserUser(tUserLogin);
         if (flag == 0) {
-            return RetResponse.makeOKRsp("注册失败！");
+            return RetResponse.makeOKRsp("0");
         }
-        return RetResponse.makeOKRsp("注册成功！");
+        return RetResponse.makeOKRsp("1");
     }
 
     /**
@@ -43,9 +43,9 @@ public class UserService {
     public RetResult userIdQuery(TUserLogin tUserLogin) throws Exception {
         int flag = userMapper.userIdQuery(tUserLogin);
         if (flag != 0) {
-            return RetResponse.makeErrRsp("用户已经存在！");
+            return RetResponse.makeErrRsp("0");
         }
-        return RetResponse.makeOKRsp("用户名可用！");
+        return RetResponse.makeOKRsp("1");
     }
 
     /**
@@ -56,9 +56,9 @@ public class UserService {
     public RetResult userLogin(TUserLogin tUserLogin) throws Exception {
         TUserLogin tUserLogin1 = userMapper.userLogin(tUserLogin);
         if (tUserLogin1 == null) {
-            return RetResponse.makeOKRsp("用户名或密码错误！");
+            return RetResponse.makeOKRsp("0");
         }
-        return RetResponse.makeOKRsp("登录成功！", tUserLogin1);
+        return RetResponse.makeOKRsp("1", tUserLogin1);
     }
     /**
      * 添加个人信息
@@ -67,10 +67,10 @@ public class UserService {
      */
     public RetResult insertUserInfo(TUserInfo tUserInfo) throws Exception {
         int flag = userMapper.insertUserinfo(tUserInfo);
-        if (flag == 1){
-            return RetResponse.makeOKRsp("信息添加成功！");
+        if (flag != 1){
+            return RetResponse.makeErrRsp("0");
         }
-        return RetResponse.makeErrRsp("信息添加失败");
+        return RetResponse.makeOKRsp("1");
     }
 
     /**
@@ -80,10 +80,11 @@ public class UserService {
      */
     public RetResult updatetUserInfo(TUserInfo tUserInfo) throws Exception {
         int flag = userMapper.updateUserinfo(tUserInfo);
-        if (flag == 1){
-            return RetResponse.makeOKRsp("信息修改成功！");
+        if (flag != 1){
+            return RetResponse.makeErrRsp("0");
         }
-        return RetResponse.makeErrRsp("信息修改失败");
+        return RetResponse.makeOKRsp("1");
+
     }
     /**
      * 查询个人信息
@@ -93,8 +94,8 @@ public class UserService {
     public RetResult queryUserInfo(String userId) throws Exception {
         TUserInfo tUserInfo = userMapper.queryUserInfo(userId);
         if (tUserInfo == null){
-            return RetResponse.makeErrRsp("个人信息不存在!");
+            return RetResponse.makeErrRsp("0");
         }
-        return RetResponse.makeOKRsp("查询成功!",tUserInfo);
+        return RetResponse.makeOKRsp("1",tUserInfo);
     }
 }
