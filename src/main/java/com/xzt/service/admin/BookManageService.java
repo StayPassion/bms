@@ -55,8 +55,6 @@ public class BookManageService {
         if(bookManageMapper.checkExsistByName(bookName) == 1){
             //书籍已存在
             TBookInfo bookInfo = bookManageMapper.selectBookBy(map);
-            Map<String,Object> resultMap = new HashMap<>();
-            resultMap.put("bookInfo",bookInfo);
             return RetResponse.makeOKRsp("0",bookInfo);
         }else{
             return RetResponse.makeOKRsp("1");
