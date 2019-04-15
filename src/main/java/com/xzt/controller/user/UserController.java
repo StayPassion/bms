@@ -1,5 +1,6 @@
 package com.xzt.controller.user;
 
+import com.xzt.entity.TUserInfo;
 import com.xzt.entity.TUserLogin;
 import com.xzt.service.UserService;
 import com.xzt.util.RetResponse;
@@ -17,7 +18,7 @@ import javax.annotation.Resource;
  * @Version 1.0.0
  */
 @RestController
-@RequestMapping("/book")
+@RequestMapping("/user/book")
 public class UserController {
     @Resource
     private UserService userService;
@@ -28,7 +29,7 @@ public class UserController {
      * @param tUserLogin
      * @return
      */
-    @PostMapping("/userRestger")
+    @PostMapping("/userRegister")
     public RetResult userInsert(@RequestBody TUserLogin tUserLogin){
         try {
             RetResult retResult = userService.userInsert(tUserLogin);
@@ -62,6 +63,49 @@ public class UserController {
     public RetResult userLogin(@RequestBody TUserLogin tUserLogin){
         try {
             RetResult retResult = userService.userLogin(tUserLogin);
+            return retResult;
+        } catch (Exception e) {
+            return RetResponse.makeInternalServiceErrors("服务器内部错误");
+        }
+    }
+
+    /**
+     * 添加个人信息
+     * @param tUserInfo
+     * @return
+     */
+    @PostMapping("/insertUserInfo")
+    public RetResult insertUserInfo(@RequestBody TUserInfo tUserInfo){
+        try {
+            RetResult retResult = userService.insertUserInfo(tUserInfo);
+            return retResult;
+        } catch (Exception e) {
+            return RetResponse.makeInternalServiceErrors("服务器内部错误");
+        }
+    }
+    /**
+     * 修改个人信息
+     * @param tUserInfo
+     * @return
+     */
+    @PostMapping("/updateUserInfo")
+    public RetResult updateUserInfo(@RequestBody TUserInfo tUserInfo){
+        try {
+            RetResult retResult = userService.updatetUserInfo(tUserInfo);
+            return retResult;
+        } catch (Exception e) {
+            return RetResponse.makeInternalServiceErrors("服务器内部错误");
+        }
+    }
+    /**
+     * 查询个人信息
+     * @param tUserInfo
+     * @return
+     */
+    @PostMapping("/queryUserInfo")
+    public RetResult queryUserInfo(@RequestBody TUserInfo tUserInfo){
+        try {
+            RetResult retResult = userService.queryUserInfo(tUserInfo.getUserId());
             return retResult;
         } catch (Exception e) {
             return RetResponse.makeInternalServiceErrors("服务器内部错误");
