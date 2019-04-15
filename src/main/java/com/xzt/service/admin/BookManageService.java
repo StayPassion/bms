@@ -50,10 +50,11 @@ public class BookManageService {
 
     //检测书籍是否存在
     public RetResult checkBookExsist(String bookName) {
-        Map<String,Object> map = new HashMap<>();
-        map.put("bookName",bookName);
+
         if(bookManageMapper.checkExsistByName(bookName) == 1){
             //书籍已存在
+            Map<String,Object> map = new HashMap<>();
+            map.put("name",bookName);
             TBookInfo bookInfo = bookManageMapper.selectBookBy(map);
             return RetResponse.makeOKRsp("0",bookInfo);
         }else{

@@ -1,12 +1,13 @@
 package com.xzt.mapper.admin;
 
 import com.xzt.entity.TBookInfo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.Map;
 
 public interface BookManageMapper {
 
-    int checkExsistByName(String name);
+    int checkExsistByName(String bookName);
 
     int updateBookNumberByBookId(long bookId, int i);
 

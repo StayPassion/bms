@@ -8,19 +8,19 @@
     <sql id="t_book_info_select_body">
         from t_book_info
         <where>
-            <if test="book_id != null"> name = #{book_id} </if>
+            <if test="book_id != null"> book_id = #{book_id} </if>
         </where>
         <where>
             <if test="name != null"> name = #{name} </if>
         </where>
         <where>
-            <if test="author != null"> name = #{author} </if>
+            <if test="author != null"> author = #{author} </if>
         </where>
         <where>
-            <if test="publish != null"> name = #{publish} </if>
+            <if test="publish != null"> publish = #{publish} </if>
         </where>
         <where>
-            <if test="introduction != null"> name = #{introduction} </if>
+            <if test="introduction != null"> introduction = #{introduction} </if>
         </where>
         <where>
             <if test="language != null"> language = #{language} </if>
@@ -34,7 +34,7 @@
     </sql>
 
     <select id="checkExsistByName" resultType="Integer">
-        select count(*) from t_book_info where name = #{name}
+        select count(*) from t_book_info where t_book_info.name = #{bookName}
     </select>
 
     <update id="updateBookNumberByBookId">
@@ -46,7 +46,7 @@
         values (#{bookId},#{name},#{author},#{publish},#{introduction},#{language},#{price},#{pubdate})
     </insert>
 
-    <select id="selectBookBy">
+    <select id="selectBookBy" resultType="com.xzt.entity.TBookInfo">
         select *
         <include refid="t_book_info_select_body"></include>
     </select>

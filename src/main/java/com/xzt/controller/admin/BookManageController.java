@@ -28,7 +28,8 @@ public class BookManageController {
 
     //检测书籍是否存在
     @RequestMapping("/checkBookExsist")
-    public RetResult checkBookExsist(@RequestBody String bookName){
+    public RetResult checkBookExsist(@RequestBody JSONObject jsonObject){
+        String bookName = jsonObject.getString("bookName");
         RetResult retResult = bmservice.checkBookExsist(bookName);
         return retResult;
     }
