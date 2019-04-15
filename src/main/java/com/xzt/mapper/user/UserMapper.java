@@ -1,4 +1,4 @@
-package com.xzt.mapper;
+package com.xzt.mapper.user;
 
 import com.xzt.entity.TUserInfo;
 import com.xzt.entity.TUserLogin;

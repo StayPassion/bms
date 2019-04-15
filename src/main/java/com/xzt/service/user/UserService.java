@@ -1,8 +1,8 @@
-package com.xzt.service;
+package com.xzt.service.user;
 
 import com.xzt.entity.TUserInfo;
 import com.xzt.entity.TUserLogin;
-import com.xzt.mapper.UserMapper;
+import com.xzt.mapper.user.UserMapper;
 import com.xzt.util.RetResponse;
 import com.xzt.util.RetResult;
 import org.springframework.stereotype.Service;

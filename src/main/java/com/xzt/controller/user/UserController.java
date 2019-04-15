@@ -2,7 +2,7 @@ package com.xzt.controller.user;
 
 import com.xzt.entity.TUserInfo;
 import com.xzt.entity.TUserLogin;
-import com.xzt.service.UserService;
+import com.xzt.service.user.UserService;
 import com.xzt.util.RetResponse;
 import com.xzt.util.RetResult;
 import org.springframework.web.bind.annotation.PostMapping;
