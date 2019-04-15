@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xzt.mapper.admin.BookManageMapper">
+    <!--标签重用片段-->
+    <sql id="t_book_info_select_body">
+        from t_book_info
+        <where>
+            <if test="book_id != null"> name = #{book_id} </if>
+        </where>
+        <where>
+            <if test="name != null"> name = #{name} </if>
+        </where>
+        <where>
+            <if test="author != null"> name = #{author} </if>
+        </where>
+        <where>
+            <if test="publish != null"> name = #{publish} </if>
+        </where>
+        <where>
+            <if test="introduction != null"> name = #{introduction} </if>
+        </where>
+        <where>
+            <if test="language != null"> language = #{language} </if>
+        </where>
+        <where>
+            <if test="price != null"> price = #{price} </if>
+        </where>
+        <where>
+            <if test="pubdate != null"> pubdate = #{pubdate} </if>
+        </where>
+    </sql>
+
+    <select id="checkExsistByName" resultType="Integer">
+        select count(*) from t_book_info where name = #{name}
+    </select>
+
+    <update id="updateBookNumberByBookId">
+        update t_book_number set number = #{i} where book_id = #{bookId}
+    </update>
+
+    <insert id="insertBook">
+        insert into t_book_info('book_id','name','author','publish','introduction','language','price','pubdate')
+        values (#{bookId},#{name},#{author},#{publish},#{introduction},#{language},#{price},#{pubdate})
+    </insert>
+
+    <select id="selectBookBy">
+        select *
+        <include refid="t_book_info_select_body"></include>
+    </select>
+
+    <select id="selectBookNumByBookId" resultType="Integer">
+        select number from t_book_number where book_id = #{bookId}
+    </select>
+
+</mapper>
