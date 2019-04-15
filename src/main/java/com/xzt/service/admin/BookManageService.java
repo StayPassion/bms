@@ -30,18 +30,18 @@ public class BookManageService {
             //更新书籍数量
             int i = bookManageMapper.updateBookNumberByBookId(bookInfo.getBookId(),number+oldBookNum);
             if (i == 1){
-                return RetResponse.makeOKRsp("书籍插入成功");
+                return RetResponse.makeOKRsp("1");
             }else{
-                return RetResponse.makeErrRsp("书籍插入失败");
+                return RetResponse.makeErrRsp("0");
             }
         }else{
             //插入书本信息
             int resp1 = bookManageMapper.insertBook(bookInfo);
             int resp2 = bookManageMapper.updateBookNumberByBookId(bookInfo.getBookId(),number);
             if (resp1 == 1 && resp2 == 1){
-                return RetResponse.makeOKRsp("书籍插入成功");
+                return RetResponse.makeOKRsp("1");
             }else{
-                return RetResponse.makeErrRsp("书籍插入失败");
+                return RetResponse.makeErrRsp("0");
             }
         }
 
@@ -55,9 +55,11 @@ public class BookManageService {
         if(bookManageMapper.checkExsistByName(bookName) == 1){
             //书籍已存在
             TBookInfo bookInfo = bookManageMapper.selectBookBy(map);
-            return RetResponse.makeOKRsp("书籍已存在",bookInfo);
+            Map<String,Object> resultMap = new HashMap<>();
+            resultMap.put("bookInfo",bookInfo);
+            return RetResponse.makeOKRsp("0",bookInfo);
         }else{
-            return RetResponse.makeOKRsp("可以插入该书籍");
+            return RetResponse.makeOKRsp("1");
         }
     }
 }
