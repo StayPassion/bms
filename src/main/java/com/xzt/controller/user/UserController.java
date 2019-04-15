@@ -1,6 +1,5 @@
 package com.xzt.controller.user;
 
-import com.xzt.entity.TUserInfo;
 import com.xzt.entity.TUserLogin;
 import com.xzt.service.user.UserService;
 import com.xzt.util.RetResponse;
@@ -54,61 +53,5 @@ public class UserController {
         }
     }
 
-    /**
-     * 用户登录
-     * @param tUserLogin
-     * @return
-     */
-    @PostMapping("/userLogin")
-    public RetResult userLogin(@RequestBody TUserLogin tUserLogin){
-        try {
-            RetResult retResult = userService.userLogin(tUserLogin);
-            return retResult;
-        } catch (Exception e) {
-            return RetResponse.makeInternalServiceErrors("服务器内部错误");
-        }
-    }
 
-    /**
-     * 添加个人信息
-     * @param tUserInfo
-     * @return
-     */
-    @PostMapping("/insertUserInfo")
-    public RetResult insertUserInfo(@RequestBody TUserInfo tUserInfo){
-        try {
-            RetResult retResult = userService.insertUserInfo(tUserInfo);
-            return retResult;
-        } catch (Exception e) {
-            return RetResponse.makeInternalServiceErrors("服务器内部错误");
-        }
-    }
-    /**
-     * 修改个人信息
-     * @param tUserInfo
-     * @return
-     */
-    @PostMapping("/updateUserInfo")
-    public RetResult updateUserInfo(@RequestBody TUserInfo tUserInfo){
-        try {
-            RetResult retResult = userService.updatetUserInfo(tUserInfo);
-            return retResult;
-        } catch (Exception e) {
-            return RetResponse.makeInternalServiceErrors("服务器内部错误");
-        }
-    }
-    /**
-     * 查询个人信息
-     * @param tUserInfo
-     * @return
-     */
-    @PostMapping("/queryUserInfo")
-    public RetResult queryUserInfo(@RequestBody TUserInfo tUserInfo){
-        try {
-            RetResult retResult = userService.queryUserInfo(tUserInfo.getUserId());
-            return retResult;
-        } catch (Exception e) {
-            return RetResponse.makeInternalServiceErrors("服务器内部错误");
-        }
-    }
 }
