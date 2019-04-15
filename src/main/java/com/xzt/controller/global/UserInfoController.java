@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.support.SessionStatus;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 /**
  * @Author PengBo
@@ -30,12 +32,29 @@ public class UserInfoController {
      * @return
      */
     @PostMapping("/userLogin")
-    public RetResult userLogin(@RequestBody TUserLogin tUserLogin){
+    public RetResult userLogin(@RequestBody TUserLogin tUserLogin, HttpSession httpSession){
+
         try {
-            RetResult retResult = userInfoService.userLogin(tUserLogin);
+            RetResult retResult = userInfoService.userLogin(tUserLogin,httpSession);
             return retResult;
         } catch (Exception e) {
             return RetResponse.makeInternalServiceErrors("服务器内部错误");
+        }
+    }
+
+    /**
+     * 注销
+     * @param httpSession
+     * @param sessionStatus
+     * @return
+     */
+    @PostMapping("/logout")
+    public RetResult logout(HttpSession httpSession, SessionStatus sessionStatus) {
+        try {
+            userInfoService.logout(httpSession,sessionStatus);
+            return RetResponse.makeOKRsp("1");
+        } catch (Exception e) {
+            return RetResponse.makeInternalServiceErrors("服务内部错误");
         }
     }
 
