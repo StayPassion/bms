@@ -19,5 +19,7 @@ public interface BookingBookMapper {
 
     int bookingBook(TBookingRecornd tBookingRecornd)throws Exception;
 
-    int addBookingNumber(long bookesNum,long bookId);
+    int addBookingNumber(long bookesNum,long bookId)throws Exception;
+
+    int updateBookNumber(long lend_num ,long bookId)throws Exception;
 }

@@ -16,6 +16,8 @@
     <update id="addBookingNumber">
         update t_book_number set bookes_num=#{bookesNum} where book_id = #{bookId}
     </update>
-
+    <update id="updateBookNumber">
+        update t_book_number set lend_num=#{lendNum} where book_id = #{bookId}
+    </update>
 
 </mapper>

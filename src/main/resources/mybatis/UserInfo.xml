@@ -14,7 +14,7 @@
     </select>
 
     <select id="userLogin" resultType="com.xzt.entity.TUserLogin">
-        select * from t_user_login where user_id = #{userId} and user_password = #{userPassword}
+        select * from t_user_login where user_id = #{userId} and user_password = #{userPassword} and user_permission=#{userPermission}
     </select>
     <insert id="insertUserinfo">
         insert into
