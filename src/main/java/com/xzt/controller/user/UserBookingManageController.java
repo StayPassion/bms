@@ -19,7 +19,7 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping(("/user/book"))
+@RequestMapping(("/q/user/book"))
 public class UserBookingManageController {
     @Resource
     private UserBookingManageService userBookingManageService;
@@ -75,11 +75,11 @@ public class UserBookingManageController {
         }
     }
 
-
     //返回类别接口
     @RequestMapping("/getSorts")
     public RetResult getSorts(){
         return userBookingManageService.searchSorts();
     }
+
 
 }

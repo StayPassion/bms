@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController()
-@RequestMapping("/admin/book")
+@RequestMapping("/q/admin/book")
 public class BookManageController {
     @Resource(name = "bmservice")
     private BookManageService bmservice;

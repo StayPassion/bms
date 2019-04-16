@@ -21,8 +21,8 @@
             <if test="language != null"> And language = #{language} </if>
             <if test="price != null"> And price = #{price} </if>
             <if test="pubdate != null"> And pubdate = #{pubdate} </if>
-            <if test="offset != null and pageSize != null">limit #{offset},#{pageSize}</if>
         </where>
+        <if test="offset != null and pageSize != null">limit #{offset},#{pageSize}</if>
     </sql>
 
    <select id="getBookSorts" resultType="com.xzt.entity.TClassInfo">

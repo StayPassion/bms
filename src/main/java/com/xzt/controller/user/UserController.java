@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  * @Version 1.0.0
  */
 @RestController
-@RequestMapping("/user/book")
+@RequestMapping("/q/user/book")
 public class UserController {
     @Resource
     private UserService userService;

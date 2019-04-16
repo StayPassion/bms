@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  * @Version 1.0.0
  */
 @RestController
-@RequestMapping("/user/book")
+@RequestMapping("/q/user/book")
 public class UserInfoController {
 
     @Resource

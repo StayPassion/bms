@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.xzt.entity.TBookInfo;
 import com.xzt.entity.TClassInfo;
 import com.xzt.mapper.user.UserBookingManageMapper;
+import com.xzt.util.ChineseToPinyin;
 import com.xzt.util.RetResponse;
 import com.xzt.util.RetResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,8 +38,20 @@ public class UserBookingManageService {
     }
 
     //首字母查询
-    public RetResult searchBookByFirstChar(char charValue, int offset, int pageSize) {
-        
+    public RetResult searchBookByFirstChar(char firstChar, int offset, int pageSize) {
+        Map<String,Object> map = new HashMap<>();
+        List<TBookInfo> bookInfoList = userBookingManageMapper.getBooksBy(map);
+        List<TBookInfo> tempList = null;
+        List<TBookInfo> resultList = null;
+        for (int i = 0; i < bookInfoList.size(); i++){
+            if (firstChar == ChineseToPinyin.getPinYinHeadChar(bookInfoList.get(i).getName())){
+                tempList.add(bookInfoList.get(i));
+            }
+        }
+        //对数据结果进行分页
+
+
+
         return null;
     }
 

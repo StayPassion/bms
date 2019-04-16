@@ -21,7 +21,7 @@ import java.sql.Date;
  * @Version 1.0.0
  */
 @RestController
-@RequestMapping("/user/booking")
+@RequestMapping("/q/user/booking")
 public class BookingBookController {
     @Resource
     private BookingBookService bookingBookService;
