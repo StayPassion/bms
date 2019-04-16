@@ -4,8 +4,43 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xzt.mapper.user.UserBookingManageMapper">
+    <!--标签重用片段-->
+    <sql id="t_book_info_sort_select_body">
+        from t_book_info
+        <where>
+            <if test="bookIds != null">
+                book_id in
+                <foreach collection="bookIds" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+             </if>
+            <if test="name != null"> And name like CONCAT('%','${name}','%')</if>
+            <if test="author != null"> And author = #{author} </if>
+            <if test="publish != null"> And publish = #{publish} </if>
+            <if test="introduction != null"> And introduction = #{introduction} </if>
+            <if test="language != null"> And language = #{language} </if>
+            <if test="price != null"> And price = #{price} </if>
+            <if test="pubdate != null"> And pubdate = #{pubdate} </if>
+            <if test="offset != null and pageSize != null">limit #{offset},#{pageSize}</if>
+        </where>
+    </sql>
+
    <select id="getBookSorts" resultType="com.xzt.entity.TClassInfo">
        select * from t_class_info
    </select>
+
+    <select id="getBooksBy" resultType="com.xzt.entity.TBookInfo">
+        select *
+        <include refid="t_book_info_sort_select_body"></include>
+    </select>
+
+    <!--根据类别查询图书id-->
+    <select id="searchBookIdsByClassId" resultType="Integer">
+        select distinct book_id from t_book_class
+        where class_id in
+        <foreach collection="list" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
 
 </mapper>
