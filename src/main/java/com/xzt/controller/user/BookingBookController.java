@@ -51,7 +51,6 @@ public class BookingBookController {
         String userId = jsonObject.getString("userId");
         Integer bookId = jsonObject.getInteger("bookId");
         String bookingTime = jsonObject.getString("bookingTime");
-        System.out.println(bookingTime);
         String bookingDeadline = jsonObject.getString("bookingDeadline");
         TBookingRecornd tBookingRecornd = new TBookingRecornd();
         tBookingRecornd.setUserId(userId);
