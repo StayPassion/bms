@@ -10,6 +10,7 @@ import com.xzt.util.RetResult;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,21 +39,23 @@ public class UserBookingManageService {
     }
 
     //首字母查询
-    public RetResult searchBookByFirstChar(char firstChar, int offset, int pageSize) {
+    public RetResult searchBookByFirstChar(char firstChar) {
+
         Map<String,Object> map = new HashMap<>();
         List<TBookInfo> bookInfoList = userBookingManageMapper.getBooksBy(map);
-        List<TBookInfo> tempList = null;
-        List<TBookInfo> resultList = null;
+        List<TBookInfo> resultList = new ArrayList<>();
         for (int i = 0; i < bookInfoList.size(); i++){
-            if (firstChar == ChineseToPinyin.getPinYinHeadChar(bookInfoList.get(i).getName())){
-                tempList.add(bookInfoList.get(i));
+            int isOk = ChineseToPinyin.getPinYinHeadChar(bookInfoList.get(i).getName(),firstChar);
+            if (isOk == 1 || isOk == 0){
+                resultList.add(bookInfoList.get(i));
             }
         }
-        //对数据结果进行分页
 
-
-
-        return null;
+        if (resultList.size() > 0){
+            return RetResponse.makeOKRsp("1",resultList);
+        }else {
+            return RetResponse.makeOKRsp("0");
+        }
     }
 
 

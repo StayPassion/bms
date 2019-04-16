@@ -55,7 +55,7 @@ public class UserBookingManageController {
 
         if (letter != null){
             //首字母查询
-            return userBookingManageService.searchBookByFirstChar(letter.charValue(),offset,pageSize);
+            return userBookingManageService.searchBookByFirstChar(letter.charValue());
         }else{
             //类别查询和模糊查询
             //类别不为空，查询bookids
