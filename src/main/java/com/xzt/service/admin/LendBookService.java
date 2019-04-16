@@ -26,13 +26,12 @@ public class LendBookService {
 
     /**
      * 借书
-     *
      * @param tLendBook
      * @return
      * @throws Exception
      */
     @Transactional
-    public RetResult lendBook(TLendBook tLendBook) throws Exception {
+    public RetResult lend(TLendBook tLendBook) throws Exception {
         TBookNumber bookNumber = bookingBookMapper.queryBooked(tLendBook.getBookId());
         long number = bookNumber.getNumber();
         long lendNumber = bookNumber.getBookesNum();
@@ -40,7 +39,7 @@ public class LendBookService {
         if (canBookNumber > 1){
             int flag = lendBookMapper.lendBook(tLendBook);
             if (flag == 1) {
-               bookingBookMapper.updateBookNumber(lendNumber+1,tLendBook.getBookId());
+               int flag2 = bookingBookMapper.updateBookNumber(lendNumber+1,tLendBook.getBookId());
             }
             return RetResponse.makeOKRsp("1");
         }
@@ -54,6 +53,7 @@ public class LendBookService {
      * @return
      * @throws Exception
      */
+    @Transactional
     public RetResult returnBook(TLendBook tLendBook) throws Exception {
         TBookNumber bookNumber = bookingBookMapper.queryBooked(tLendBook.getBookId());
         long lendNumber = bookNumber.getBookesNum();

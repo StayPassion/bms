@@ -21,5 +21,5 @@ public interface BookingBookMapper {
 
     int addBookingNumber(long bookesNum,long bookId)throws Exception;
 
-    int updateBookNumber(long lend_num ,long bookId)throws Exception;
+    int updateBookNumber(long lendNum ,long bookId)throws Exception;
 }

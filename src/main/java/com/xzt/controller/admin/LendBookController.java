@@ -29,15 +29,21 @@ public class LendBookController {
      */
     @PostMapping("/lendBook")
     public RetResult lendBook(@RequestBody TLendBook tLendBook){
+        System.out.println(tLendBook.getBookId());
         try {
-            RetResult retResult = lendBookService.lendBook(tLendBook);
+            RetResult retResult = lendBookService.lend(tLendBook);
             return retResult;
         } catch (Exception e) {
             return RetResponse.makeInternalServiceErrors("服务器内部错误");
         }
     }
 
-    @PostMapping("")
+    /**
+     * 还书
+     * @param tLendBook
+     * @return
+     */
+    @PostMapping("/returnBook")
     public RetResult returnBook(@RequestBody TLendBook tLendBook){
         try {
             RetResult retResult = lendBookService.returnBook(tLendBook);
