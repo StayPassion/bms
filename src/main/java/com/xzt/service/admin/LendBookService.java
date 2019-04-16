@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author PengBo
@@ -26,6 +27,7 @@ public class LendBookService {
 
     /**
      * 借书
+     *
      * @param tLendBook
      * @return
      * @throws Exception
@@ -36,10 +38,10 @@ public class LendBookService {
         long number = bookNumber.getNumber();
         long lendNumber = bookNumber.getBookesNum();
         long canBookNumber = number - lendNumber;
-        if (canBookNumber > 1){
+        if (canBookNumber > 1) {
             int flag = lendBookMapper.lendBook(tLendBook);
             if (flag == 1) {
-               int flag2 = bookingBookMapper.updateBookNumber(lendNumber+1,tLendBook.getBookId());
+                int flag2 = bookingBookMapper.updateBookNumber(lendNumber + 1, tLendBook.getBookId());
             }
             return RetResponse.makeOKRsp("1");
         }
@@ -57,12 +59,27 @@ public class LendBookService {
     public RetResult returnBook(TLendBook tLendBook) throws Exception {
         TBookNumber bookNumber = bookingBookMapper.queryBooked(tLendBook.getBookId());
         long lendNumber = bookNumber.getBookesNum();
+
         int flag = lendBookMapper.returnBook(tLendBook);
         if (flag == 1) {
-            bookingBookMapper.updateBookNumber(lendNumber-1,tLendBook.getBookId());
+            bookingBookMapper.updateBookNumber(lendNumber - 1, tLendBook.getBookId());
             return RetResponse.makeOKRsp("1");
         }
         return RetResponse.makeErrRsp("0");
 
+    }
+
+    /**
+     * 查询一个人所有的借书情况
+     * @param tLendBook
+     * @return
+     * @throws Exception
+     */
+    public RetResult queryLendBook(TLendBook tLendBook) throws Exception {
+        List<TBookNumber> list = lendBookMapper.queryLendBook(tLendBook);
+        if (list.size() == 0){
+            return RetResponse.makeErrRsp("0");
+        }
+            return RetResponse.makeOKRsp("1", list);
     }
 }

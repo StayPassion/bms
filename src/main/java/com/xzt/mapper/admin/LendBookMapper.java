@@ -1,6 +1,9 @@
 package com.xzt.mapper.admin;
 
+import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TLendBook;
+
+import java.util.List;
 
 /**
  * @Author PengBo
@@ -11,4 +14,6 @@ public interface LendBookMapper {
     int lendBook(TLendBook tLendBook)throws Exception;
 
     int returnBook(TLendBook tLendBook)throws Exception;
+
+    List<TBookNumber> queryLendBook(TLendBook tLendBook)throws Exception;
 }
