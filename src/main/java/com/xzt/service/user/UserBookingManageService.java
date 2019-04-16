@@ -2,8 +2,10 @@ package com.xzt.service.user;
 
 import com.alibaba.fastjson.JSONObject;
 import com.xzt.entity.TBookInfo;
+import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TClassInfo;
 import com.xzt.mapper.user.UserBookingManageMapper;
+import com.xzt.pojo.PBookInfoNumber;
 import com.xzt.util.ChineseToPinyin;
 import com.xzt.util.RetResponse;
 import com.xzt.util.RetResult;
@@ -29,9 +31,17 @@ public class UserBookingManageService {
 
     //分类查询
     public RetResult searchBookBySort(Map<String,Object> map) {
-        List<TBookInfo> list = userBookingManageMapper.getBooksBy(map);
-        if (list != null && list.size() > 0){
-            return RetResponse.makeOKRsp("1",list);
+        List<TBookInfo> bookInfoList = userBookingManageMapper.getBooksBy(map);
+        List<PBookInfoNumber> resultList = new ArrayList<>();
+        for (int i = 0; i < bookInfoList.size(); i++){
+            PBookInfoNumber pBookInfoNumber = new PBookInfoNumber();
+            TBookNumber tBookNumber = searchBookNumById(bookInfoList.get(i).getBookId());
+            pBookInfoNumber.setBookInfo(bookInfoList.get(i));
+            pBookInfoNumber.setBookNumber(tBookNumber);
+            resultList.add(pBookInfoNumber);
+        }
+        if (resultList != null && resultList.size() > 0){
+            return RetResponse.makeOKRsp("1",resultList);
         }else {
             return RetResponse.makeErrRsp("0");
         }
@@ -43,12 +53,21 @@ public class UserBookingManageService {
 
         Map<String,Object> map = new HashMap<>();
         List<TBookInfo> bookInfoList = userBookingManageMapper.getBooksBy(map);
-        List<TBookInfo> resultList = new ArrayList<>();
+        List<TBookInfo> tempList = new ArrayList<>();
+        List<PBookInfoNumber> resultList = new ArrayList<>();
         for (int i = 0; i < bookInfoList.size(); i++){
             int isOk = ChineseToPinyin.getPinYinHeadChar(bookInfoList.get(i).getName(),firstChar);
             if (isOk == 1 || isOk == 0){
-                resultList.add(bookInfoList.get(i));
+                tempList.add(bookInfoList.get(i));
             }
+        }
+
+        for (int i = 0; i < tempList.size(); i++){
+            PBookInfoNumber pBookInfoNumber = new PBookInfoNumber();
+            pBookInfoNumber.setBookInfo(tempList.get(i));
+            TBookNumber tBookNumber = searchBookNumById(tempList.get(i).getBookId());
+            pBookInfoNumber.setBookNumber(tBookNumber);
+            resultList.add(pBookInfoNumber);
         }
 
         if (resultList.size() > 0){
@@ -67,4 +86,10 @@ public class UserBookingManageService {
         List list = userBookingManageMapper.searchBookIdsByClassId(classIdList);
         return list;
     }
+
+    //查询书籍数量
+    public TBookNumber searchBookNumById(long bookId){
+        return userBookingManageMapper.findBookNumById(bookId);
+    }
+
 }

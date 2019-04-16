@@ -43,4 +43,8 @@
         </foreach>
     </select>
 
+    <!--查询书籍数量-->
+    <select id="findBookNumById" resultType="com.xzt.entity.TBookNumber">
+        select * from t_book_number where book_id = #{bookId}
+    </select>
 </mapper>

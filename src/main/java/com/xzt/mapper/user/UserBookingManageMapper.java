@@ -1,6 +1,7 @@
 package com.xzt.mapper.user;
 
 import com.xzt.entity.TBookInfo;
+import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TClassInfo;
 
 import java.util.List;
@@ -14,4 +15,6 @@ public interface UserBookingManageMapper {
     List<TBookInfo> getBooksBy(Map<String,Object> map);
 
     List searchBookIdsByClassId(List classIdList);
+
+    TBookNumber findBookNumById(long bookId);
 }

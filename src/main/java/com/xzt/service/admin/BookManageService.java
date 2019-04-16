@@ -36,11 +36,14 @@ public class BookManageService {
             }
         }else{
             //插入书本信息
-            int resp1 = bookManageMapper.insertBook(bookInfo);
-            int resp2 = bookManageMapper.updateBookNumberByBookId(bookInfo.getBookId(),number);
-            if (resp1 == 1 && resp2 == 1){
+            try {
+                int bookId = bookManageMapper.getMostId();
+                bookId += 1;
+                bookInfo.setBookId(bookId);
+                bookManageMapper.insertBook(bookInfo);
+                bookManageMapper.insertBookNumber(bookInfo.getBookId(),number);
                 return RetResponse.makeOKRsp("1");
-            }else{
+            }catch (Exception e){
                 return RetResponse.makeErrRsp("0");
             }
         }

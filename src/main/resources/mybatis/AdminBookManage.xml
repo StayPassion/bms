@@ -28,8 +28,12 @@
         update t_book_number set number = #{i} where book_id = #{bookId}
     </update>
 
+    <insert id="insertBookNumber">
+        insert into t_book_number(book_id,number) values (#{bookId},#{number})
+    </insert>
+
     <insert id="insertBook">
-        insert into t_book_info('book_id','name','author','publish','introduction','language','price','pubdate')
+        insert into t_book_info(book_id,name,author,publish,introduction,language,price,pubdate)
         values (#{bookId},#{name},#{author},#{publish},#{introduction},#{language},#{price},#{pubdate})
     </insert>
 
@@ -42,4 +46,7 @@
         select number from t_book_number where book_id = #{bookId}
     </select>
 
+    <select id="getMostId" resultType="Integer">
+        select max(book_id) from t_book_number
+    </select>
 </mapper>
