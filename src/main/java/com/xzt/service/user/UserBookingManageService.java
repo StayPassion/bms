@@ -52,7 +52,10 @@ public class UserBookingManageService {
         }
 
         if (resultList.size() > 0){
-            return RetResponse.makeOKRsp("1",resultList);
+            Map<String,Object> resultMap = new HashMap<>();
+            resultMap.put("resultMap",resultList);
+            resultMap.put("totalNum",resultList.size());
+            return RetResponse.makeOKRsp("1",resultMap);
         }else {
             return RetResponse.makeOKRsp("0");
         }
