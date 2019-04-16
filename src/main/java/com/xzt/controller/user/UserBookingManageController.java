@@ -20,7 +20,7 @@ public class UserBookingManageController {
     @Resource
     private UserBookingManageService userBookingManageService;
 
-    //分类查询
+/*    //分类查询
     @RequestMapping("/searchBySort")
     public RetResult searchBookBySort(@RequestBody JSONObject jsonObject){
         RetResult retResult = userBookingManageService.searchBookBySort(jsonObject);
@@ -31,6 +31,6 @@ public class UserBookingManageController {
     @RequestMapping("/getSorts")
     public RetResult getSorts(){
         return userBookingManageService.searchSorts();
-    }
+    }*/
 
 }

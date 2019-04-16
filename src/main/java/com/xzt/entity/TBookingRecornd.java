@@ -1,10 +1,13 @@
 package com.xzt.entity;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
 public class TBookingRecornd {
 
   private long seqNum;
-  private long userId;
+  private String userId;
   private long bookId;
   private java.sql.Date bookingTime;
   private java.sql.Date bookingDeadline;
@@ -18,15 +21,13 @@ public class TBookingRecornd {
     this.seqNum = seqNum;
   }
 
-
-  public long getUserId() {
+  public String getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(String userId) {
     this.userId = userId;
   }
-
 
   public long getBookId() {
     return bookId;

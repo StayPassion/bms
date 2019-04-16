@@ -4,7 +4,7 @@ package com.xzt.entity;
 public class TLendBook {
 
   private long seqNum;
-  private long userId;
+  private String userId;
   private long bookId;
   private java.sql.Date lendTime;
   private long isReturn;
@@ -19,11 +19,11 @@ public class TLendBook {
   }
 
 
-  public long getUserId() {
+  public String getUserId() {
     return userId;
   }
 
-  public void setUserId(long userId) {
+  public void setUserId(String userId) {
     this.userId = userId;
   }
 

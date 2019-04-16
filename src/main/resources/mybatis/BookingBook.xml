@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xzt.mapper.user.BookingBookMapper">
+    <select id="queryBooked" resultType="com.xzt.entity.TBookNumber">
+        select * from t_book_number where book_id = #{bookId}
+    </select>
+
+    <insert id="bookingBook" >
+        insert into
+        t_booking_recornd (user_id,book_id,booking_time,booking_Deadline)
+        values (#{userId},#{bookId},#{bookingTime},#{bookingDeadline})
+    </insert>
+    <update id="addBookingNumber">
+        update t_book_number set bookes_num=#{bookesNum} where book_id = #{bookId}
+    </update>
+
+
+</mapper>
