@@ -41,13 +41,14 @@ public class UserBookingManageController {
             map.put("name",bookName);
 
         }
-        if (jsonObject.getInteger("offset") != null){
-            offset = jsonObject.getInteger("offset");
-            map.put("offset",offset);
-        }
-        if (jsonObject.getInteger("pageSize") != null){
+        if (jsonObject.getInteger("offset") != null && jsonObject.getInteger("pageSize") != null){
             pageSize = jsonObject.getInteger("pageSize");
             map.put("pageSize",pageSize);
+            offset = jsonObject.getInteger("offset");
+            map.put("offset",offset*pageSize);
+        }
+        if (jsonObject.getInteger("pageSize") != null){
+
         }
         if (jsonObject.getJSONArray("classIds") != null){
             claasIds = jsonObject.getJSONArray("classIds");
