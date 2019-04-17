@@ -1,5 +1,6 @@
 package com.xzt.controller.admin;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xzt.entity.TBookInfo;
 import com.xzt.service.admin.BookManageService;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @RestController()
 @RequestMapping("/q/admin/book")
@@ -22,7 +26,12 @@ public class BookManageController {
         JSONObject bookInfoJSon = jsonObject.getJSONObject("bookInfo");
         TBookInfo bookInfo = JSONObject.toJavaObject(bookInfoJSon,TBookInfo.class);
         int number = jsonObject.getJSONObject("bookNum").getInteger("number");
-        RetResult retResult = bmservice.addBook(bookInfo,number);
+        JSONArray jsonArray = jsonObject.getJSONArray("classIds");
+        List<Long> classIdList = new ArrayList<>();
+        for (int i = 0; i < jsonArray.size(); i++){
+            classIdList.add(jsonArray.getLongValue(i));
+        }
+        RetResult retResult = bmservice.addBook(bookInfo,number,classIdList);
         return retResult;
     }
 

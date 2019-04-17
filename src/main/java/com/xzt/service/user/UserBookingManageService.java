@@ -31,6 +31,25 @@ public class UserBookingManageService {
 
     //分类查询
     public RetResult searchBookBySort(Map<String,Object> map) {
+        Map<String,Object> resultMap = new HashMap<>();
+        //查询书籍总数
+        List list = (List) map.get("bookIds");
+        int totalNum = 0;
+        if (list != null){
+            Map<String,Object> selectMap = new HashMap<>();
+            selectMap.put("bookIdList",list);
+            String name = (String) map.get("name");
+            if (name != null){
+                selectMap.put("name",name);
+            }
+             totalNum = userBookingManageMapper.searchBookNumBy(selectMap);
+        }else {
+            String name = (String) map.get("name");
+            totalNum = userBookingManageMapper.searchBookNumByName(name);
+        }
+        resultMap.put("totalNum",totalNum);
+
+        //查询书籍
         List<TBookInfo> bookInfoList = userBookingManageMapper.getBooksBy(map);
         List<PBookInfoNumber> resultList = new ArrayList<>();
         for (int i = 0; i < bookInfoList.size(); i++){
@@ -41,12 +60,14 @@ public class UserBookingManageService {
             resultList.add(pBookInfoNumber);
         }
         if (resultList != null && resultList.size() > 0){
-            return RetResponse.makeOKRsp("1",resultList);
+            resultMap.put("resultList",resultList);
+            return RetResponse.makeOKRsp("1",resultMap);
         }else {
             return RetResponse.makeErrRsp("0");
         }
 
     }
+
 
     //首字母查询
     public RetResult searchBookByFirstChar(char firstChar) {

@@ -3,6 +3,7 @@ package com.xzt.controller.user;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xzt.service.user.UserBookingManageService;
+import com.xzt.util.RetResponse;
 import com.xzt.util.RetResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,9 +48,7 @@ public class UserBookingManageController {
             offset = jsonObject.getInteger("offset");
             map.put("offset",offset*pageSize);
         }
-        if (jsonObject.getInteger("pageSize") != null){
 
-        }
         if (jsonObject.getJSONArray("classIds") != null){
             claasIds = jsonObject.getJSONArray("classIds");
         }
@@ -69,6 +68,8 @@ public class UserBookingManageController {
                 if (bookIdList != null){
                     //类别下的模糊查询
                     map.put("bookIds",bookIdList);
+                }else{
+                    return RetResponse.makeErrRsp("该类别下没有书籍");
                 }
             }
             RetResult retResult = userBookingManageService.searchBookBySort(map);

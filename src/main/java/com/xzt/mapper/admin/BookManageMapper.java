@@ -3,6 +3,7 @@ package com.xzt.mapper.admin;
 import com.xzt.entity.TBookInfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Map;
 
 public interface BookManageMapper {
@@ -20,4 +21,6 @@ public interface BookManageMapper {
     int getMostId();
 
     int insertBookNumber(long bookId, int number);
+
+    void insertBK(List list);
 }

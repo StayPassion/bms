@@ -49,4 +49,11 @@
     <select id="getMostId" resultType="Integer">
         select max(book_id) from t_book_number
     </select>
+
+    <insert id="insertBK">
+        insert into t_book_class(book_id,class_id) values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (#{item.bookId},#{item.classId})
+        </foreach>
+    </insert>
 </mapper>

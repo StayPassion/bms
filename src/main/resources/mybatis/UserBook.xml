@@ -47,4 +47,25 @@
     <select id="findBookNumById" resultType="com.xzt.entity.TBookNumber">
         select * from t_book_number where book_id = #{bookId}
     </select>
+
+    <!--分类查询书籍数量-->
+    <select id="searchBookNumBy" resultType="Integer">
+        select count(*) from t_book_info
+        <where>
+            <if test="bookIdList != null">
+                book_id in
+                <foreach collection="bookIdList" index="index" item="item" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="name != null"> And name like CONCAT('%','${name}','%')</if>
+        </where>
+
+    </select>
+
+    <select id="searchBookNumByName" resultType="Integer">
+        select count(*) from t_book_info where
+        name like CONCAT('%','${name}','%')
+    </select>
+
 </mapper>

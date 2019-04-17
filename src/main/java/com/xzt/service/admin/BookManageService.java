@@ -1,5 +1,6 @@
 package com.xzt.service.admin;
 
+import com.xzt.entity.TBookClass;
 import com.xzt.entity.TBookInfo;
 import com.xzt.mapper.admin.BookManageMapper;
 import com.xzt.util.RetCode;
@@ -10,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service("bmservice")
@@ -19,7 +22,7 @@ public class BookManageService {
     private BookManageMapper bookManageMapper;
 
     @Transactional
-    public RetResult addBook(TBookInfo bookInfo, int number) {
+    public RetResult addBook(TBookInfo bookInfo, int number, List classList) {
         Map<String,Object> map = new HashMap<>();
         //判断书本是否存在
         if(bookManageMapper.checkExsistByName(bookInfo.getName()) == 1){
@@ -42,8 +45,18 @@ public class BookManageService {
                 bookInfo.setBookId(bookId);
                 bookManageMapper.insertBook(bookInfo);
                 bookManageMapper.insertBookNumber(bookInfo.getBookId(),number);
+                //插入书籍类别表
+                List<TBookClass> bcList = new ArrayList<>();
+                for (int i = 0; i < classList.size(); i++){
+                    TBookClass tBookClass = new TBookClass();
+                    tBookClass.setBookId(bookInfo.getBookId());
+                    tBookClass.setClassId((Long) classList.get(i));
+                    bcList.add(tBookClass);
+                }
+                bookManageMapper.insertBK(bcList);
                 return RetResponse.makeOKRsp("1");
             }catch (Exception e){
+                e.printStackTrace();
                 return RetResponse.makeErrRsp("0");
             }
         }
