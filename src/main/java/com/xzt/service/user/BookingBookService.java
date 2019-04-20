@@ -59,6 +59,7 @@ public class BookingBookService {
         java.util.Date utilDate = calendar.getTime();
         Date tomorrow =new Date(utilDate.getTime());
         tBookingRecornd.setBookingTime(today);
+        tBookingRecornd.setBookingDeadline(tomorrow);
         TBookNumber bookNumber = bookingBookMapper.queryBooked(tBookingRecornd.getBookId());
         long number = bookNumber.getNumber();
         long lendNumber = bookNumber.getLendNum();
