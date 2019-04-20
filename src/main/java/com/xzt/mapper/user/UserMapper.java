@@ -3,6 +3,7 @@ package com.xzt.mapper.user;
 import com.xzt.entity.TUserInfo;
 import com.xzt.entity.TUserLogin;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @Author PengBo
@@ -15,5 +16,5 @@ public interface UserMapper {
     TUserLogin userLogin(TUserLogin tUserLogin)throws Exception;
     int insertUserinfo(TUserInfo tUserInfo);
     int updateUserinfo(TUserInfo tUserInfo);
-    TUserInfo queryUserInfo(String userId);
+    TUserInfo queryUserInfo(@Param("userId") String userId);
 }
