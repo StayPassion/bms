@@ -43,23 +43,11 @@ public class BookingBookController {
 
     /**
      * 预约图书
-     * @param jsonObject
+     * @param tBookingRecornd
      * @return
      */
     @PostMapping("/bookingBook")
-    public RetResult bookingBook(@RequestBody JSONObject jsonObject) {
-        String userId = jsonObject.getString("userId");
-        Integer bookId = jsonObject.getInteger("bookId");
-        String bookingTime = jsonObject.getString("bookingTime");
-        String bookingDeadline = jsonObject.getString("bookingDeadline");
-        TBookingRecornd tBookingRecornd = new TBookingRecornd();
-        tBookingRecornd.setUserId(userId);
-        tBookingRecornd.setBookId(bookId);
-        java.sql.Date date1 = Date.valueOf(bookingTime);
-        java.sql.Date date2 = Date.valueOf(bookingDeadline);
-        tBookingRecornd.setBookingTime(date1);
-        tBookingRecornd.setBookingDeadline(date2);
-
+    public RetResult bookingBook(@RequestBody TBookingRecornd tBookingRecornd) {
         try {
             RetResult result = bookingBookService.bookingBook(tBookingRecornd);
             return result;
@@ -67,5 +55,4 @@ public class BookingBookController {
             return RetResponse.makeInternalServiceErrors("内部服务器错误");
         }
     }
-
 }
