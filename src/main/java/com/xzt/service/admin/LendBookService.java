@@ -70,17 +70,4 @@ public class LendBookService {
 
     }
 
-    /**
-     * 查询一个人所有的借书情况
-     * @param tLendBook
-     * @return
-     * @throws Exception
-     */
-    public RetResult queryLendBook(TLendBook tLendBook) throws Exception {
-        List<LendAndBook> list = lendBookMapper.queryLendBook(tLendBook);
-        if (list.size() == 0){
-            return RetResponse.makeErrRsp("0");
-        }
-            return RetResponse.makeOKRsp("1", list);
-    }
 }

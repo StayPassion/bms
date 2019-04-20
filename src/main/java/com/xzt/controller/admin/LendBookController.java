@@ -37,20 +37,7 @@ public class LendBookController {
         }
     }
 
-    /**
-     * 查询一个人所有的借书情况
-     * @param tLendBook
-     * @return
-     */
-    @PostMapping("/queryLendBook")
-    public RetResult queryLendBook(@RequestBody TLendBook tLendBook){
-        try {
-            RetResult retResult = lendBookService.queryLendBook(tLendBook);
-            return retResult;
-        } catch (Exception e) {
-            return RetResponse.makeInternalServiceErrors("服务器内部错误");
-        }
-    }
+
     /**
      * 还书
      * @param tLendBook
