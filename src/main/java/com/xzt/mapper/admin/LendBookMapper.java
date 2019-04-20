@@ -1,5 +1,6 @@
 package com.xzt.mapper.admin;
 
+import com.xzt.entity.LendAndBook;
 import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TLendBook;
 
@@ -15,5 +16,5 @@ public interface LendBookMapper {
 
     int returnBook(TLendBook tLendBook)throws Exception;
 
-    List<TBookNumber> queryLendBook(TLendBook tLendBook)throws Exception;
+    List<LendAndBook> queryLendBook(TLendBook tLendBook)throws Exception;
 }

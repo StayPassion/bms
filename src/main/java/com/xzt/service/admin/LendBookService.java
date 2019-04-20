@@ -1,5 +1,6 @@
 package com.xzt.service.admin;
 
+import com.xzt.entity.LendAndBook;
 import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TLendBook;
 import com.xzt.mapper.admin.LendBookMapper;
@@ -76,7 +77,7 @@ public class LendBookService {
      * @throws Exception
      */
     public RetResult queryLendBook(TLendBook tLendBook) throws Exception {
-        List<TBookNumber> list = lendBookMapper.queryLendBook(tLendBook);
+        List<LendAndBook> list = lendBookMapper.queryLendBook(tLendBook);
         if (list.size() == 0){
             return RetResponse.makeErrRsp("0");
         }

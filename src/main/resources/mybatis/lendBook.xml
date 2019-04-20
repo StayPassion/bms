@@ -15,7 +15,8 @@
         and book_id=#{bookId} and is_return= 1
     </update>
 
-    <select id="queryLendBook" resultType="com.xzt.entity.TLendBook">
-        select * from t_lend_book where user_id = #{userId}and is_return=#{isReturn}
+    <select id="queryLendBook" resultType="com.xzt.entity.LendAndBook">
+        select user_id,lend_time,is_return,name,author,language from t_lend_book,t_book_info
+        where t_lend_book.book_id = t_book_info.book_id and user_id = #{userId} and is_return=#{isReturn}
     </select>
 </mapper>
