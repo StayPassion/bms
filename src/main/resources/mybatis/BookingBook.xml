@@ -21,7 +21,7 @@
     </update>
 
     <select id="queryBooking" resultType="com.xzt.entity.TBookingRecornd">
-        select * from t_booking_recornd where user_id = #{userId} and book_id=#{bookId}
+        select * from t_booking_recornd where user_id = #{userId}
     </select>
 
 </mapper>
