@@ -4,6 +4,7 @@ import com.xzt.entity.BookAndBooking;
 import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TBookingRecornd;
 import com.xzt.util.RetResult;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +17,13 @@ import java.util.List;
  */
 public interface BookingBookMapper {
 
-    TBookNumber queryBooked(Long bookId) throws Exception;
+    TBookNumber queryBooked(@Param("bookId") Long bookId) throws Exception;
 
     int bookingBook(TBookingRecornd tBookingRecornd)throws Exception;
 
-    int addBookingNumber(long bookesNum,long bookId)throws Exception;
+    int addBookingNumber(@Param("bookesNum")long bookesNum,@Param("bookId")long bookId)throws Exception;
 
-    int updateBookNumber(long lendNum ,long bookId)throws Exception;
+    int updateBookNumber(@Param("lendNum")long lendNum ,@Param("bookId")long bookId)throws Exception;
 
     List<BookAndBooking> queryBooking(TBookingRecornd tBookingRecornd)throws Exception;
 }
