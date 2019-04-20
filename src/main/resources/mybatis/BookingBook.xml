@@ -20,4 +20,8 @@
         update t_book_number set lend_num=#{lendNum} where book_id = #{bookId}
     </update>
 
+    <select id="queryBooking" resultType="com.xzt.entity.TBookingRecornd">
+        select * from t_booking_recornd where user_id = #{userId} and book_id=#{bookId}
+    </select>
+
 </mapper>

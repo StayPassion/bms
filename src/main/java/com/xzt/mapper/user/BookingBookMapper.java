@@ -22,4 +22,6 @@ public interface BookingBookMapper {
     int addBookingNumber(long bookesNum,long bookId)throws Exception;
 
     int updateBookNumber(long lendNum ,long bookId)throws Exception;
+
+    List<TBookingRecornd> queryBooking(TBookingRecornd tBookingRecornd)throws Exception;
 }

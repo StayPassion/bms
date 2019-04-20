@@ -1,6 +1,5 @@
 package com.xzt.controller.user;
 
-import com.alibaba.fastjson.JSONObject;
 import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TBookingRecornd;
 import com.xzt.service.user.BookingBookService;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import java.sql.Date;
 
 /**
  * 预约借书类
@@ -50,6 +48,21 @@ public class BookingBookController {
     public RetResult bookingBook(@RequestBody TBookingRecornd tBookingRecornd) {
         try {
             RetResult result = bookingBookService.bookingBook(tBookingRecornd);
+            return result;
+        } catch (Exception e) {
+            return RetResponse.makeInternalServiceErrors("内部服务器错误");
+        }
+    }
+
+    /**
+     * 查询预约图书
+     * @param tBookingRecornd
+     * @return
+     */
+    @PostMapping("/queryBookingBook")
+    public RetResult queryBooking(@RequestBody TBookingRecornd tBookingRecornd) {
+        try {
+            RetResult result = bookingBookService.queryBooking(tBookingRecornd);
             return result;
         } catch (Exception e) {
             return RetResponse.makeInternalServiceErrors("内部服务器错误");

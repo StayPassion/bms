@@ -10,10 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.sql.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author PengBo
@@ -62,7 +59,6 @@ public class BookingBookService {
         java.util.Date utilDate = calendar.getTime();
         Date tomorrow =new Date(utilDate.getTime());
         tBookingRecornd.setBookingTime(today);
-        System.out.println(tBookingRecornd.getBookingDeadline());
         TBookNumber bookNumber = bookingBookMapper.queryBooked(tBookingRecornd.getBookId());
         long number = bookNumber.getNumber();
         long lendNumber = bookNumber.getLendNum();
@@ -78,5 +74,19 @@ public class BookingBookService {
             return RetResponse.makeErrRsp("0");
         }
 
+    }
+
+    /**
+     * 查询预约图书
+     * @param tBookingRecornd
+     * @return
+     * @throws Exception
+     */
+    public RetResult queryBooking(TBookingRecornd tBookingRecornd) throws Exception {
+        List<TBookingRecornd> tBookingRecorndList = bookingBookMapper.queryBooking(tBookingRecornd);
+        if (tBookingRecorndList.size()==0){
+            return RetResponse.makeErrRsp("0");
+        }
+        return RetResponse.makeOKRsp("1", tBookingRecorndList);
     }
 }
