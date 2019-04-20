@@ -8,7 +8,7 @@
         select * from t_book_number where book_id = #{bookId}
     </select>
 
-    <insert id="bookingBook" >
+    <insert id="bookingBook">
         insert into
         t_booking_recornd (user_id,book_id,booking_time,booking_Deadline)
         values (#{userId},#{bookId},#{bookingTime},#{bookingDeadline})
@@ -20,8 +20,9 @@
         update t_book_number set lend_num=#{lendNum} where book_id = #{bookId}
     </update>
 
-    <select id="queryBooking" resultType="com.xzt.entity.TBookingRecornd">
-        select * from t_booking_recornd where user_id = #{userId}
+    <select id="queryBooking" resultType="com.xzt.entity.BookAndBooking">
+        select user_id,booking_time,booking_Deadline,name,author,language from t_booking_recornd ,t_book_info
+        where t_booking_recornd.book_id = t_book_info.book_id and user_id = #{userId}
     </select>
 
 </mapper>

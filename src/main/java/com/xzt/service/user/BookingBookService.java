@@ -1,5 +1,6 @@
 package com.xzt.service.user;
 
+import com.xzt.entity.BookAndBooking;
 import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TBookingRecornd;
 import com.xzt.mapper.user.BookingBookMapper;
@@ -84,7 +85,7 @@ public class BookingBookService {
      * @throws Exception
      */
     public RetResult queryBooking(TBookingRecornd tBookingRecornd) throws Exception {
-        List<TBookingRecornd> tBookingRecorndList = bookingBookMapper.queryBooking(tBookingRecornd);
+        List<BookAndBooking> tBookingRecorndList = bookingBookMapper.queryBooking(tBookingRecornd);
         if (tBookingRecorndList.size()==0){
             return RetResponse.makeErrRsp("0");
         }

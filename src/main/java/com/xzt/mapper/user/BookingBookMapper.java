@@ -1,5 +1,6 @@
 package com.xzt.mapper.user;
 
+import com.xzt.entity.BookAndBooking;
 import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TBookingRecornd;
 import com.xzt.util.RetResult;
@@ -23,5 +24,5 @@ public interface BookingBookMapper {
 
     int updateBookNumber(long lendNum ,long bookId)throws Exception;
 
-    List<TBookingRecornd> queryBooking(TBookingRecornd tBookingRecornd)throws Exception;
+    List<BookAndBooking> queryBooking(TBookingRecornd tBookingRecornd)throws Exception;
 }
