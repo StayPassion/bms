@@ -11,8 +11,18 @@ import java.sql.Date;
 public class BookAndBooking {
     private long bookId;
     private String name;
+
+    public String getPublish() {
+        return publish;
+    }
+
+    public void setPublish(String publish) {
+        this.publish = publish;
+    }
+
     private String author;
     private String userId;
+    private String publish;
     private java.sql.Date bookingTime;
 
     public long getBookId() {
