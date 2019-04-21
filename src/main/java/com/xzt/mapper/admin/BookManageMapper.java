@@ -10,7 +10,7 @@ public interface BookManageMapper {
 
     int checkExsistByName(String bookName);
 
-    int updateBookNumberByBookId(long bookId, int i);
+    int updateBookNumberByBookId(@Param("bookId") long bookId, @Param("i") int i);
 
     int insertBook(TBookInfo bookInfo);
 
@@ -20,7 +20,7 @@ public interface BookManageMapper {
 
     int getMostId();
 
-    int insertBookNumber(long bookId, int number);
+    int insertBookNumber(@Param("bookId") long bookId, @Param("number") int number);
 
     void insertBK(List list);
 
