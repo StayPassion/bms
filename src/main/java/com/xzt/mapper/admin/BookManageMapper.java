@@ -23,4 +23,18 @@ public interface BookManageMapper {
     int insertBookNumber(long bookId, int number);
 
     void insertBK(List list);
+
+    void updateBookInfoById(TBookInfo bookInfo);
+
+    //删除书籍相关信息
+
+    void deleteBookInfo(Long bookId);
+
+    void deleteBookClass(Long bookId);
+
+    void deleteBookNumber(Long bookId);
+
+    void deletebookRecord(Long bookId);
+
+    void deleteLendBook(Long bookId);
 }

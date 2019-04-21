@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.xzt.entity.TBookInfo;
 import com.xzt.service.admin.BookManageService;
+import com.xzt.util.RetResponse;
 import com.xzt.util.RetResult;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.RecursiveTask;
 
 @RestController()
 @RequestMapping("/q/admin/book")
@@ -42,4 +44,24 @@ public class BookManageController {
         RetResult retResult = bmservice.checkBookExsist(bookName);
         return retResult;
     }
+
+    //修改书籍信息
+    @RequestMapping("/updateBookInfo")
+    public RetResult updateBookInfo(@RequestBody TBookInfo bookInfo){
+        return bmservice.updateBookInfoById(bookInfo);
+    }
+
+    //删除书籍信息
+    @RequestMapping("/deleteBookInfo")
+    public RetResult deleteBookInfo(@RequestBody JSONObject jsonObject){
+
+        if (jsonObject.getLong("bookId") != null){
+            Long bookId = jsonObject.getLong("bookId");
+            return bmservice.deleteBookInfoById(bookId);
+        }else {
+            return RetResponse.makeErrRsp("传入参数有误");
+        }
+
+    }
+
 }

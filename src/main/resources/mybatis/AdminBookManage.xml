@@ -8,7 +8,7 @@
     <sql id="t_book_info_select_body">
         from t_book_info
         <where>
-            <if test="book_id != null"> book_id = #{book_id} </if>
+            <if test="book_id != null"> book_id = #{bookId} </if>
             <if test="name != null">and name = #{name} </if>
             <if test="author != null">and author = #{author} </if>
             <if test="publish != null">and publish = #{publish} </if>
@@ -56,4 +56,39 @@
             (#{item.bookId},#{item.classId})
         </foreach>
     </insert>
+
+    <update id="updateBookInfoById">
+        update t_book_info
+        <set>
+            <if test="name != null">name = #{name},</if>
+            <if test="author != null">author = #{author}, </if>
+            <if test="publish != null">publish = #{publish}, </if>
+            <if test="introduction != null">introduction = #{introduction}, </if>
+            <if test="language != null">language = #{language}, </if>
+            <if test="price != null">price = #{price}, </if>
+            <if test="pubdate != null">pubdate = #{pubdate},</if>
+        </set>
+        where book_id = #{bookId}
+    </update>
+
+    <!--删除书籍相关信息-->
+    <delete id="deleteBookInfo">
+        delete from t_book_info where book_id = #{bookId}
+    </delete>
+
+    <delete id="deleteBookClass">
+        delete from t_book_class where book_id = #{bookId}
+    </delete>
+
+    <delete id="deleteBookNumber">
+        delete from t_book_number where book_id = #{bookId}
+    </delete>
+
+    <delete id="deletebookRecord">
+        delete from t_booking_recornd where book_id = #{bookId}
+    </delete>
+
+    <delete id="deleteLendBook">
+        delete from t_lend_book where book_id = #{bookId}
+    </delete>
 </mapper>

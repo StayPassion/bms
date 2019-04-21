@@ -77,4 +77,30 @@ public class BookManageService {
             return RetResponse.makeOKRsp("1");
         }
     }
+
+    //修改书籍信息
+    public RetResult updateBookInfoById(TBookInfo bookInfo) {
+        try {
+            bookManageMapper.updateBookInfoById(bookInfo);
+            return RetResponse.makeOKRsp("1");
+        }catch (Exception e){
+            e.printStackTrace();
+            return RetResponse.makeErrRsp("0");
+        }
+    }
+
+    @Transactional
+    public RetResult deleteBookInfoById(Long bookId) {
+        try {
+            bookManageMapper.deleteBookInfo(bookId);
+            bookManageMapper.deleteBookClass(bookId);
+            bookManageMapper.deleteBookNumber(bookId);
+            bookManageMapper.deletebookRecord(bookId);
+            bookManageMapper.deleteLendBook(bookId);
+        }catch (Exception e){
+            e.printStackTrace();
+            return RetResponse.makeErrRsp("0");
+        }
+        return RetResponse.makeOKRsp("1");
+    }
 }
