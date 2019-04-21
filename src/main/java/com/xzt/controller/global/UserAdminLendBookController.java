@@ -2,7 +2,6 @@ package com.xzt.controller.global;
 
 
 import com.xzt.entity.TLendBook;
-import com.xzt.service.admin.LendBookService;
 import com.xzt.util.RetResponse;
 import com.xzt.util.RetResult;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.xzt.service.global.QueryLendBook;
 import javax.annotation.Resource;
-import java.util.List;
+
 
 /**
  * @Author PengBo

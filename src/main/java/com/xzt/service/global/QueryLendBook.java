@@ -32,7 +32,7 @@ public class QueryLendBook {
     public RetResult queryLendBook(TLendBook tLendBook) throws Exception {
         List<LendAndBook> list = lendBookMapper.queryLendBook(tLendBook);
         if (list.size() == 0) {
-            return RetResponse.makeErrRsp("0");
+            return RetResponse.makeOKRsp("0");
         }
         return RetResponse.makeOKRsp("1", list);
     }
