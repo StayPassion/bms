@@ -65,11 +65,11 @@ public class BookManageService {
         try {
             bookManageMapper.updateBookNumberByBookId(bookInfo.getBookId(),number);
             bookManageMapper.updateBookInfoById(bookInfo);
-            return RetResponse.makeOKRsp("1");
         }catch (Exception e){
             e.printStackTrace();
             return RetResponse.makeErrRsp("0");
         }
+        return RetResponse.makeOKRsp("1");
     }
 
     @Transactional
