@@ -47,8 +47,11 @@ public class BookManageController {
 
     //修改书籍信息
     @RequestMapping("/updateBookInfo")
-    public RetResult updateBookInfo(@RequestBody TBookInfo bookInfo){
-        return bmservice.updateBookInfoById(bookInfo);
+    public RetResult updateBookInfo(@RequestBody JSONObject jsonObject){
+        JSONObject bookInfoJSon = jsonObject.getJSONObject("bookInfo");
+        TBookInfo bookInfo = JSONObject.toJavaObject(bookInfoJSon,TBookInfo.class);
+        int number = jsonObject.getJSONObject("bookNum").getInteger("number");
+        return bmservice.updateBookInfoById(bookInfo,number);
     }
 
     //删除书籍信息

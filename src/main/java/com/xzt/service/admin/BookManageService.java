@@ -23,21 +23,6 @@ public class BookManageService {
 
     @Transactional
     public RetResult addBook(TBookInfo bookInfo, int number, List classList) {
-        Map<String,Object> map = new HashMap<>();
-        //判断书本是否存在
-        if(bookManageMapper.checkExsistByName(bookInfo.getName()) == 1){
-           //书名存在
-            //获取书籍数量
-            map.put("bookId",bookInfo.getBookId());
-            int oldBookNum = bookManageMapper.selectBookNumByBookId(map);
-            //更新书籍数量
-            int i = bookManageMapper.updateBookNumberByBookId(bookInfo.getBookId(),number+oldBookNum);
-            if (i == 1){
-                return RetResponse.makeOKRsp("1");
-            }else{
-                return RetResponse.makeErrRsp("0");
-            }
-        }else{
             //插入书本信息
             try {
                 int bookId = bookManageMapper.getMostId();
@@ -59,9 +44,6 @@ public class BookManageService {
                 e.printStackTrace();
                 return RetResponse.makeErrRsp("0");
             }
-        }
-
-
     }
 
     //检测书籍是否存在
@@ -79,8 +61,9 @@ public class BookManageService {
     }
 
     //修改书籍信息
-    public RetResult updateBookInfoById(TBookInfo bookInfo) {
+    public RetResult updateBookInfoById(TBookInfo bookInfo,int number) {
         try {
+            bookManageMapper.updateBookNumberByBookId(bookInfo.getBookId(),number);
             bookManageMapper.updateBookInfoById(bookInfo);
             return RetResponse.makeOKRsp("1");
         }catch (Exception e){

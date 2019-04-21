@@ -16,8 +16,6 @@ public interface BookManageMapper {
 
     TBookInfo selectBookBy(Map<String, Object> map);
 
-    int selectBookNumByBookId(Map<String, Object> map);
-
     int getMostId();
 
     int insertBookNumber(@Param("bookId") long bookId, @Param("number") int number);

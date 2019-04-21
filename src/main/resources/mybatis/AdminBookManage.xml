@@ -42,10 +42,6 @@
         <include refid="t_book_info_select_body"></include>
     </select>
 
-    <select id="selectBookNumByBookId" resultType="Integer">
-        select number from t_book_number where book_id = #{bookId}
-    </select>
-
     <select id="getMostId" resultType="Integer">
         select max(book_id) from t_book_number
     </select>
