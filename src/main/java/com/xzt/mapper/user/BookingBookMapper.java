@@ -29,6 +29,7 @@ public interface BookingBookMapper {
 
     List<BookAndBooking> queryAllBooking(@Param("offset") Integer offset, @Param("pageSize")Integer pageSize,
                                          @Param("name")String name)throws Exception;
+    Integer queryBookingCount()throws Exception;
 
 
 }

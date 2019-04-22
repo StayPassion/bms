@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author PengBo
@@ -78,10 +80,14 @@ public class LendBookService {
      */
     public RetResult queryAllBooking(Integer offset, Integer pageSize, String name) throws Exception {
         List<BookAndBooking> list = bookingBookMapper.queryAllBooking(offset, pageSize, name);
+        int count = bookingBookMapper.queryBookingCount();
+        Map<String, Object> map = new HashMap<>();
+        map.put("count",count);
+        map.put("bookingList", list);
         if (list.size() == 0) {
             return RetResponse.makeOKRsp("0");
         }
-        return RetResponse.makeOKRsp("1", list);
+        return RetResponse.makeOKRsp("1", map);
     }
 
     /**
@@ -94,9 +100,13 @@ public class LendBookService {
      */
     public RetResult queryAllLend(Integer offset, Integer pageSize, String name) throws Exception {
         List<LendAndBook> list = lendBookMapper.queryAllLend(offset, pageSize, name);
+        int count = lendBookMapper.queryLendCount();
+        Map<String, Object> map = new HashMap<>();
+        map.put("count",count);
+        map.put("LendList", list);
         if (list.size() == 0) {
             return RetResponse.makeOKRsp("0");
         }
-        return RetResponse.makeOKRsp("1", list);
+        return RetResponse.makeOKRsp("1", map);
     }
 }

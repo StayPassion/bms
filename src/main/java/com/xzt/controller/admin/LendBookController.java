@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.sql.Date;
 
 /**
  * @Author PengBo
@@ -30,6 +31,7 @@ public class LendBookController {
      */
     @PostMapping("/lendBook")
     public RetResult lendBook(@RequestBody TLendBook tLendBook){
+        tLendBook.setLendTime(new Date(System.currentTimeMillis()));
         try {
             RetResult retResult = lendBookService.lend(tLendBook);
             return retResult;

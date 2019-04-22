@@ -28,4 +28,8 @@
         </where>
         <if test="offset != null and pageSize != null">limit #{offset},#{pageSize}</if>
     </select>
+
+    <select id="queryLendCount" resultType="Integer">
+        select count(*) from t_lend_book;
+    </select>
 </mapper>

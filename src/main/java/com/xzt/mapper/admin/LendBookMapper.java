@@ -20,4 +20,6 @@ public interface LendBookMapper {
     List<LendAndBook> queryLendBook(TLendBook tLendBook)throws Exception;
     List<LendAndBook> queryAllLend(@Param("offset") Integer offset, @Param("pageSize")Integer pageSize,
                                    @Param("name")String name)throws Exception;
+
+    Integer queryLendCount() throws Exception;
 }

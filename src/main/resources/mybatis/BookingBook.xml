@@ -33,6 +33,9 @@
         </where>
         <if test="offset != null and pageSize != null">limit #{offset},#{pageSize}</if>
     </select>
+    <select id="queryBookingCount" resultType="Integer">
+        select count(*) from t_booking_recornd;
+    </select>
 
 
 
