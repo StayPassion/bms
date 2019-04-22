@@ -38,7 +38,6 @@ public class LendBookController {
         }
     }
 
-
     /**
      * 还书
      * @param tLendBook
@@ -66,6 +65,25 @@ public class LendBookController {
         String name = jsonObject.getString("name");
         try {
             RetResult retResult = lendBookService.queryAllBooking(offset,pageSize,name);
+            return retResult;
+        } catch (Exception e) {
+            return RetResponse.makeInternalServiceErrors("服务器内部错误");
+        }
+    }
+
+    /**
+     * 查询所有人的借书情况
+     * @param jsonObject
+     * @return
+     */
+    @PostMapping("/queryAllLend")
+    public RetResult queryAllLend(@RequestBody JSONObject jsonObject){
+
+        Integer offset = jsonObject.getInteger("offset");
+        Integer pageSize = jsonObject.getInteger("pageSize");
+        String name = jsonObject.getString("name");
+        try {
+            RetResult retResult = lendBookService.queryAllLend(offset,pageSize,name);
             return retResult;
         } catch (Exception e) {
             return RetResponse.makeInternalServiceErrors("服务器内部错误");

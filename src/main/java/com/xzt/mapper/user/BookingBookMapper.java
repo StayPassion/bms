@@ -1,11 +1,11 @@
 package com.xzt.mapper.user;
 
 import com.xzt.entity.BookAndBooking;
+import com.xzt.entity.LendAndBook;
 import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TBookingRecornd;
 import com.xzt.util.RetResult;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -29,4 +29,6 @@ public interface BookingBookMapper {
 
     List<BookAndBooking> queryAllBooking(@Param("offset") Integer offset, @Param("pageSize")Integer pageSize,
                                          @Param("name")String name)throws Exception;
+
+
 }

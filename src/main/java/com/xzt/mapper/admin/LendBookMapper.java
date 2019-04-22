@@ -3,6 +3,7 @@ package com.xzt.mapper.admin;
 import com.xzt.entity.LendAndBook;
 import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TLendBook;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,6 @@ public interface LendBookMapper {
     int returnBook(TLendBook tLendBook)throws Exception;
 
     List<LendAndBook> queryLendBook(TLendBook tLendBook)throws Exception;
+    List<LendAndBook> queryAllLend(@Param("offset") Integer offset, @Param("pageSize")Integer pageSize,
+                                   @Param("name")String name)throws Exception;
 }

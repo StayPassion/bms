@@ -43,7 +43,7 @@ public class LendBookService {
         if (canBookNumber > 1) {
             int flag = lendBookMapper.lendBook(tLendBook);
             if (flag == 1) {
-                int flag2 = bookingBookMapper.updateBookNumber(lendNumber + 1, tLendBook.getBookId());
+                bookingBookMapper.updateBookNumber(lendNumber + 1, tLendBook.getBookId());
             }
             return RetResponse.makeOKRsp("1");
         }
@@ -76,17 +76,27 @@ public class LendBookService {
      *
      * @return
      */
-    public RetResult queryAllBooking(Integer offset, Integer pageSize, String name) {
-        List<BookAndBooking> list = null;
-        try {
-            list = bookingBookMapper.queryAllBooking(offset, pageSize, name);
-            if (list.size() == 0){
-                return RetResponse.makeErrRsp("0");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public RetResult queryAllBooking(Integer offset, Integer pageSize, String name) throws Exception {
+        List<BookAndBooking> list = bookingBookMapper.queryAllBooking(offset, pageSize, name);
+        if (list.size() == 0) {
+            return RetResponse.makeOKRsp("0");
         }
+        return RetResponse.makeOKRsp("1", list);
+    }
 
+    /**
+     * 查询所有人的借书情况
+     * @param offset
+     * @param pageSize
+     * @param name
+     * @return
+     * @throws Exception
+     */
+    public RetResult queryAllLend(Integer offset, Integer pageSize, String name) throws Exception {
+        List<LendAndBook> list = lendBookMapper.queryAllLend(offset, pageSize, name);
+        if (list.size() == 0) {
+            return RetResponse.makeOKRsp("0");
+        }
         return RetResponse.makeOKRsp("1", list);
     }
 }
