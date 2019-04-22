@@ -26,4 +26,7 @@ public interface BookingBookMapper {
     int updateBookNumber(@Param("lendNum")long lendNum ,@Param("bookId")long bookId)throws Exception;
 
     List<BookAndBooking> queryBooking(TBookingRecornd tBookingRecornd)throws Exception;
+
+    List<BookAndBooking> queryAllBooking(@Param("offset") Integer offset, @Param("pageSize")Integer pageSize,
+                                         @Param("name")String name)throws Exception;
 }

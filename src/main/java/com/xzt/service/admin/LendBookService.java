@@ -1,5 +1,6 @@
 package com.xzt.service.admin;
 
+import com.xzt.entity.BookAndBooking;
 import com.xzt.entity.LendAndBook;
 import com.xzt.entity.TBookNumber;
 import com.xzt.entity.TLendBook;
@@ -70,4 +71,22 @@ public class LendBookService {
 
     }
 
+    /**
+     * 查询所有人的预约
+     *
+     * @return
+     */
+    public RetResult queryAllBooking(Integer offset, Integer pageSize, String name) {
+        List<BookAndBooking> list = null;
+        try {
+            list = bookingBookMapper.queryAllBooking(offset, pageSize, name);
+            if (list.size() == 0){
+                return RetResponse.makeErrRsp("0");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return RetResponse.makeOKRsp("1", list);
+    }
 }

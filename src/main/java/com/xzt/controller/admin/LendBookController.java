@@ -1,5 +1,6 @@
 package com.xzt.controller.admin;
 
+import com.alibaba.fastjson.JSONObject;
 import com.xzt.entity.TLendBook;
 import com.xzt.service.admin.LendBookService;
 import com.xzt.util.RetResponse;
@@ -52,5 +53,25 @@ public class LendBookController {
             return RetResponse.makeInternalServiceErrors("服务器内部错误");
         }
     }
+
+    /**
+     * 查询所有的预约
+     * @return
+     */
+    @PostMapping("/queryAllBooking")
+    public RetResult queryAllBooking(@RequestBody JSONObject jsonObject){
+
+        Integer offset = jsonObject.getInteger("offset");
+        Integer pageSize = jsonObject.getInteger("pageSize");
+        String name = jsonObject.getString("name");
+        try {
+            RetResult retResult = lendBookService.queryAllBooking(offset,pageSize,name);
+            return retResult;
+        } catch (Exception e) {
+            return RetResponse.makeInternalServiceErrors("服务器内部错误");
+        }
+    }
+
+
 
 }

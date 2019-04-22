@@ -24,5 +24,14 @@
         select user_id,booking_time,booking_Deadline,name,author,language from t_booking_recornd ,t_book_info
         where t_booking_recornd.book_id = t_book_info.book_id and user_id = #{userId}
     </select>
+   <!-- 查询所有预约-->
+    <select id="queryAllBooking" resultType="com.xzt.entity.BookAndBooking">
+        select user_id,booking_time,booking_Deadline,name,author,language from t_booking_recornd ,t_book_info
+        <where>
+            t_booking_recornd.book_id = t_book_info.book_id
+            <if test="name != null"> and name like concat('%','${name}','%')</if>
+        </where>
+        <if test="offset != null and pageSize != null">limit #{offset},#{pageSize}</if>
+    </select>
 
 </mapper>
