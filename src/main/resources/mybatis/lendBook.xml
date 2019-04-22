@@ -21,7 +21,7 @@
     </select>
 
     <select id="queryAllLend" resultType="com.xzt.entity.LendAndBook">
-        select user_id,lend_time,is_return,name,author,language from t_lend_book,t_book_info
+        select user_id,t_lend_book.book_id,lend_time,is_return,name,author,language from t_lend_book,t_book_info
         <where>
             t_lend_book.book_id = t_book_info.book_id
             <if test="name != null"> and name like concat('%','${name}','%')</if>
